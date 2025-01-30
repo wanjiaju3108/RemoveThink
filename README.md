@@ -1,5 +1,5 @@
-# HelloPlugin
-
+# RemoveThink
+一个用于去除deepseek r1模型回复中的<think>标签及其内容
 <!--
 ## 插件开发者详阅
 
