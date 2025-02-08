@@ -43,16 +43,13 @@ class RemoveThinkPlugin(BasePlugin):
     @handler(NormalMessageResponded)
     async def normal_message_responded(self, ctx: EventContext):
         msg = ctx.event.response_text
+        new_msg = msg.replace('""', '')
         if "<think>" in msg:
-            processed_msg = self.remove_think_content(msg)
+            processed_msg = self.remove_think_content(new_msg)
             if processed_msg:
                 ctx.add_return("reply", [processed_msg])
             else:
-                ctx.add_return("reply", ["没有想出怎么回答"])
-                self.ap.logger.warning("处理后的消息为空")
-        if "请求失败" == msg:
-            ctx.add_return("reply", ["没有想出怎么回答"])
-            self.ap.logger.warning("请求失败")
+                self.ap.logger.warning("处理后的消息为空，跳过回复")
 
     # 插件卸载时触发
     def __del__(self):
