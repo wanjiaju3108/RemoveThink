@@ -48,7 +48,11 @@ class RemoveThinkPlugin(BasePlugin):
             if processed_msg:
                 ctx.add_return("reply", [processed_msg])
             else:
-                self.ap.logger.warning("处理后的消息为空，跳过回复")
+                ctx.add_return("reply", ["没有想出怎么回答"])
+                self.ap.logger.warning("处理后的消息为空")
+        if "请求失败" == msg:
+            ctx.add_return("reply", ["没有想出怎么回答"])
+            self.ap.logger.warning("请求失败")
 
     # 插件卸载时触发
     def __del__(self):
