@@ -44,6 +44,7 @@ class RemoveThinkPlugin(BasePlugin):
     async def normal_message_responded(self, ctx: EventContext):
         msg = ctx.event.response_text
         new_msg = msg.replace('**', '')
+        ctx.add_return("reply", [new_msg])
         if "<think>" in msg:
             processed_msg = self.remove_think_content(new_msg)
             if processed_msg:
